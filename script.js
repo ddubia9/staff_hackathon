@@ -31,7 +31,9 @@ function generateGameBoard(boardSize){
         var tileArr = [];
         for(var tileNumber = 0; tileNumber < boardSize; tileNumber++){
             var $tileDiv = $('<div>',{
-                class: "tile clickable " + currentClass
+                class: "tile clickable " + currentClass,
+                row: rowNumber,
+                column: tileNumber
             });
             tileArr.push($tileDiv);
         }
