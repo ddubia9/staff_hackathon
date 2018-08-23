@@ -6,10 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Staff Tac Toe</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <div id="game-area" class="game-board"></div>
+        <div class="board-container">
+            <div id="game-area" class="game-board">
+                <div class="row five">
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                </div>
+                <div class="row five">
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                </div>
+                <div class="row five">
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                </div>
+                <div class="row five">
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                </div>
+                <div class="row five">
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                    <div class="tile five"></div>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="board-size-3">3x3</button>
+            <button class="board-size-4">4x4</button>
+            <button class="board-size-5">5x5</button>
+            <button class="reset">Reset</button>
+        </div>
         <div class="player-container">
             <div class="player1">
                 <p>Player 1</p>
@@ -19,6 +68,11 @@
                 <p>Player 2</p>
                 <p>Wins: <span class="p2wins">0</span></p>
             </div>
+        </div>
+        <div class="win-modal" id="win-modal">
+          <h1 class="win-modal-winner" id="win-modal-winner">Player 1 Wins</h1>
+          <p class="win-modal-message">Would you like to play again?</p>
+          <div class="win-modal-button">New Game</div>
         </div>
     </div>
 </body>
