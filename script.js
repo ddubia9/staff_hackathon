@@ -1,7 +1,10 @@
 $('document').ready(initialize);
 
-var $gameBoard;
+var $gameBoard,
+    $winModal,
+
 var currentBoardSize;
+
 
 // Grouped directions for us to loop over and check for wins
 const directions = [
@@ -25,15 +28,14 @@ const directions = [
 
 //calls all function necessary to start gameplay
 function initialize(){
-    console.log('running init')
     createReferenceToDomElements();
     generateGameBoard(5);
-    $("#win-modal").addClass("hide");
     applyEventHandlers();
+    $winModal.addClass("hide");
 }
 
 function applyEventHandlers(){
-    $("#game-area").on("click", ".clickable", placePiece);
+    $gameBoard.on("click", ".clickable", placePiece);
     $(".board-size-3").on("click", ()=>{
         reset(3);
     })
@@ -43,7 +45,7 @@ function applyEventHandlers(){
     $(".board-size-5").on("click", ()=>{
         reset(5);
     })
-    $(".reset").on("click", ()=>{
+    $resetBttn.on("click", ()=>{
         reset(currentBoardSize);
     })
 }
@@ -51,6 +53,8 @@ function applyEventHandlers(){
 function createReferenceToDomElements(){
     console.log("running reference")
     $gameBoard = $('#game-area');
+    $winModal = $("#win-modal");
+    $resetBttn = $('#reset-bttn')
 }
 
 //function to build board, take this size of the board as a number
