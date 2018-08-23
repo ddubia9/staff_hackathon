@@ -2,6 +2,7 @@ $('document').ready(initialize);
 
 var $gameBoard;
 var currentBoardSize;
+var currentPlayer = 0;
 
 // Grouped directions for us to loop over and check for wins
 const directions = [
@@ -55,6 +56,7 @@ function createReferenceToDomElements(){
 
 //function to build board, take this size of the board as a number
 function generateGameBoard(boardSize){
+    clearBoard();
     console.log('generating board')
     var boardSizeClasses = {
         3: 'three',
@@ -96,7 +98,7 @@ function showModal(){
 }
 
 function clearBoard(){
-
+    $gameBoard.empty();
 }
 
 function placePiece(){
@@ -110,7 +112,9 @@ function reset(boardSize){
 }
 
 function togglePlayer(){
-
+    currentPlayer = 1 - currentPlayer;
+    $(".player1, .player2").removeClass("highlight");
+    $(`.player${currentPlayer}`).addClass("highlight");
 }
 
 function modalShowHide () {
@@ -135,9 +139,9 @@ function checkWin(playerPiece, positionY, positionX) {
             console.log("Our currentVector", vector);
             let currentVector = directionGrouping[vector];
 
-            thereIsAWin = countPiecesInCurrentDirection(playerPiece, currentVector, positionY, positionX, vector);     
-            
-            // Exits our win check if our current directional check produces a win that is determined by true 
+            thereIsAWin = countPiecesInCurrentDirection(playerPiece, currentVector, positionY, positionX, vector);
+
+            // Exits our win check if our current directional check produces a win that is determined by true
             if (thereIsAWin) {
                 return "YOUUUUU WIN";
             }
@@ -146,7 +150,7 @@ function checkWin(playerPiece, positionY, positionX) {
 
     function countPiecesInCurrentDirection(playerPiece, currentVector, currentY, currentX, directionName) {
         let { y, x } = currentVector; // Determines the direction we're checking for our pieces
-        
+
         while(boardArray[currentY + y] !== undefined && boardArray[currentY + y][currentX + x] !== undefined) { // Will allow us to check if we're not outside our bounds
             // Allows us to increment forward or backwards depending on the vector we're moving in
             currentY += y;

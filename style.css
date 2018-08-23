@@ -123,3 +123,6 @@ button {
 .hide {
     display: none
 }
+.highlight {
+    border: 5px solid red;
+}
