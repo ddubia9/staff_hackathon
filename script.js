@@ -5,6 +5,7 @@ var currentBoardSize;
 
 //calls all function necessary to start gameplay
 function initialize(){
+    $("#win-modal").addClass("hide");
     createReferenceToDomElements();
     applyEventHandlers();
 }
@@ -28,6 +29,7 @@ function applyEventHandlers(){
 function createReferenceToDomElements(){
     $gameBoard = $('#game-area');
 }
+
 
 function updateStats(){
 
@@ -58,3 +60,13 @@ function reset(boardSize){
 function togglePlayer(){
 
 }
+
+function modalShowHide () {
+    if ($("#win-modal").hasClass("hide")) {
+        $("#win-modal").removeClass("hide");
+    } else {
+        $("#win-modal").addClass("hide");
+    }
+
+}
+
