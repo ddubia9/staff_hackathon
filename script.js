@@ -22,4 +22,17 @@ function generateGameBoard(boardSize){
         4: '.four',
         5: '.five'
     };
+    var currentClass = boarSizeClasses[boardSize];
+    var rowArr = [];
+    for(var rowNumber = 0; rowNums < boardSize; rowNums++){
+        var $rowDiv = $('<div>', {
+            class: "row " + currentClass
+        });
+        for(var tileNumber = 0; tileNumber < boardSize; tileNumber++){
+            var $tileDiv = $('<div>',{
+                class: "tile " + currentClass
+            })
+        }
+    }
+
 }
