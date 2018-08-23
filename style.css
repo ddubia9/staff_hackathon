@@ -1,3 +1,5 @@
+
+
 * {
     box-sizing: border-box;
 }
@@ -85,4 +87,39 @@ button {
 
 .player1, .player2 {
     text-align: center;
+}
+
+.win-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 500px;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+.win-modal-winner {
+    text-align: center;
+    font-size: 3.5rem
+}
+
+.win-modal-message {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.win-modal-button {
+    text-align: center;
+    font-size: 2rem;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+.hide {
+    display: none
 }
