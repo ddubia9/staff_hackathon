@@ -39,6 +39,7 @@ function initialize(){
     generateGameBoard(currentBoardSize);
     boardArray = generateBoardArray(currentBoardSize);
     applyEventHandlers();
+    $(`.player${currentPlayer+1}`).addClass("highlight");
 }
 
 function applyEventHandlers(){
@@ -125,7 +126,7 @@ function reset(boardSize){
 function togglePlayer(){
     currentPlayer = 1 - currentPlayer;
     $(".player1, .player2").removeClass("highlight");
-    $(`.player${currentPlayer}`).addClass("highlight");
+    $(`.player${currentPlayer+1}`).addClass("highlight");
 }
 
 function modalShowHide () {
