@@ -3,7 +3,9 @@ $('document').ready(initialize);
 var $gameBoard,
     $winModal,
     $resetBttn,
-    $winModalWinner;
+    $winModalWinner,
+    $p1WinCount,
+    $p2WinCount;
 
 var currentBoardSize = 3;
 var currentPlayer = 0;
@@ -64,6 +66,8 @@ function createReferenceToDomElements(){
     $winModal = $("#win-modal");
     $resetBttn = $('#reset-bttn')
     $winModalWinner = $('#win-modal-winner');
+    $p1WinCount = $('.p1wins');
+    $p2WinCount = $('.p2wins');
 }
 
 //function to build board, take this size of the board as a number
@@ -105,8 +109,9 @@ function generateBoardArray(boardSize) {
     return boardArray;
 }
 
-function updateStats(){
-
+function updateStats(obj){
+    $p1WinCount.text(obj.player1Wins);
+    $p2WinCount.text(obj.player2Wins);
 }
 
 
