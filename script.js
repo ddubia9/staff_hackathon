@@ -1,9 +1,12 @@
 $('document').ready(initialize);
 
-var $gameBoard;
-var boardArray;
-var currentBoardSize;
+var $gameBoard,
+    $winModal,
+    $resetBttn;
+
+var currentBoardSize = 3;
 var currentPlayer = 0;
+
 
 // Grouped directions for us to loop over and check for wins
 const directions = [
@@ -27,16 +30,16 @@ const directions = [
 
 //calls all function necessary to start gameplay
 function initialize(){
-    console.log('running init')
     createReferenceToDomElements();
-    generateGameBoard(5);
-    boardArray = generateBoardArray(5);
+    generateGameBoard(currentBoardSize);
+    boardArray = generateBoardArray(currentBoardSize);
     $("#win-modal").addClass("hide");
     applyEventHandlers();
+    $winModal.addClass("hide");
 }
 
 function applyEventHandlers(){
-    $("#game-area").on("click", ".clickable", placePiece);
+    $gameBoard.on("click", ".clickable", placePiece);
     $(".board-size-3").on("click", ()=>{
         reset(3);
     })
@@ -46,7 +49,7 @@ function applyEventHandlers(){
     $(".board-size-5").on("click", ()=>{
         reset(5);
     })
-    $(".reset").on("click", ()=>{
+    $resetBttn.on("click", ()=>{
         reset(currentBoardSize);
     })
 }
@@ -54,6 +57,8 @@ function applyEventHandlers(){
 function createReferenceToDomElements(){
     console.log("running reference")
     $gameBoard = $('#game-area');
+    $winModal = $("#win-modal");
+    $resetBttn = $('#reset-bttn')
 }
 
 //function to build board, take this size of the board as a number
@@ -100,10 +105,6 @@ function updateModal(){
 
 }
 
-function showModal(){
-
-}
-
 function clearBoard(){
     $gameBoard.empty();
 }
@@ -116,7 +117,6 @@ function placePiece(event){
 }
 
 function reset(boardSize){
-    clearBoard();
     generateBoardArray(boardSize);
     generateGameBoard(boardArray);
 }
@@ -128,12 +128,7 @@ function togglePlayer(){
 }
 
 function modalShowHide () {
-    if ($("#win-modal").hasClass("hide")) {
-        $("#win-modal").removeClass("hide");
-    } else {
-        $("#win-modal").addClass("hide");
-    }
-
+    $winModal.toggleClass("hide");
 }
 
 function checkWin(playerPiece, positionY, positionX) {
@@ -153,7 +148,8 @@ function checkWin(playerPiece, positionY, positionX) {
 
             // Exits our win check if our current directional check produces a win that is determined by true
             if (thereIsAWin) {
-                return "YOUUUUU WIN";
+                currentPlayer ? playerWinCount.player2Wins++ : playerWinCount.player1Wins++;
+                updateStats(playerWinCount);
             }
         }
     }
