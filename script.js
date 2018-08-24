@@ -6,7 +6,11 @@ var $gameBoard,
 
 var currentBoardSize = 3;
 var currentPlayer = 0;
-
+var boardArray = [];
+var playerWinCount = {
+    player1Wins: 0,
+    player2Wins: 0
+}
 
 // Grouped directions for us to loop over and check for wins
 const directions = [
