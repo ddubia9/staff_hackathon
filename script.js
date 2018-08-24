@@ -34,7 +34,6 @@ function initialize(){
     createReferenceToDomElements();
     generateGameBoard(currentBoardSize);
     boardArray = generateBoardArray(currentBoardSize);
-    $("#win-modal").addClass("hide");
     applyEventHandlers();
 }
 
@@ -102,9 +101,6 @@ function updateStats(){
 
 }
 
-function updateModal(){
-
-}
 
 function clearBoard(){
     $gameBoard.empty();
