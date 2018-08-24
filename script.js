@@ -3,7 +3,7 @@ $('document').ready(initialize);
 var $gameBoard,
     $winModal,
 
-var currentBoardSize;
+var currentBoardSize = 3;
 var currentPlayer = 0;
 
 
@@ -97,10 +97,6 @@ function updateModal(){
 
 }
 
-function showModal(){
-
-}
-
 function clearBoard(){
     $gameBoard.empty();
 }
@@ -110,7 +106,6 @@ function placePiece(){
 }
 
 function reset(boardSize){
-    clearBoard();
     generateBoardArray(boardSize);
     generateGameBoard(boardArray);
 }
@@ -122,12 +117,7 @@ function togglePlayer(){
 }
 
 function modalShowHide () {
-    if ($winModal.hasClass("hide")) {
-        $winModal.removeClass("hide");
-    } else {
-        $winModal.addClass("hide");
-    }
-
+    $winModal.toggleClass("hide");
 }
 
 function checkWin(playerPiece, positionY, positionX) {
@@ -147,7 +137,8 @@ function checkWin(playerPiece, positionY, positionX) {
 
             // Exits our win check if our current directional check produces a win that is determined by true
             if (thereIsAWin) {
-                return "YOUUUUU WIN";
+                currentPlayer ? playerWinCount.player2Wins++ : playerWinCount.player1Wins++;
+                updateStats(playerWinCount);
             }
         }
     }
