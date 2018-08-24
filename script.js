@@ -118,10 +118,10 @@ function togglePlayer(){
 }
 
 function modalShowHide () {
-    if ($("#win-modal").hasClass("hide")) {
-        $("#win-modal").removeClass("hide");
+    if ($winModal.hasClass("hide")) {
+        $winModal.removeClass("hide");
     } else {
-        $("#win-modal").addClass("hide");
+        $winModal.addClass("hide");
     }
 
 }
