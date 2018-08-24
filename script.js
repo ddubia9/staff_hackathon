@@ -5,7 +5,7 @@ var $gameBoard,
     $resetBttn,
     $winModalWinner;
 
-var currentBoardSize;
+var currentBoardSize = 3;
 var currentPlayer = 0;
 
 
@@ -32,9 +32,10 @@ const directions = [
 //calls all function necessary to start gameplay
 function initialize(){
     createReferenceToDomElements();
-    generateGameBoard(5);
+    generateGameBoard(currentBoardSize);
+    boardArray = generateBoardArray(currentBoardSize);
+    $("#win-modal").addClass("hide");
     applyEventHandlers();
-    $winModal.addClass("hide");
 }
 
 function applyEventHandlers(){
@@ -92,6 +93,11 @@ function generateGameBoard(boardSize){
     return true;
 }
 
+function generateBoardArray(boardSize) {
+    currentBoardSize = boardSize;
+    return new Array(boardSize).fill(new Array(boardSize).fill(0));
+}
+
 function updateStats(){
 
 }
@@ -100,20 +106,18 @@ function updateModal(){
 
 }
 
-function showModal(){
-
-}
-
 function clearBoard(){
     $gameBoard.empty();
 }
 
-function placePiece(){
+function placePiece(event){
+    let positionY = parseInt($(event.target).attr('row'));
+    let positionX = parseInt($(event.target).attr('column'));
 
+    checkWin(currentPlayer, positionY, positionX);
 }
 
 function reset(boardSize){
-    clearBoard();
     generateBoardArray(boardSize);
     generateGameBoard(boardArray);
 }
@@ -125,12 +129,7 @@ function togglePlayer(){
 }
 
 function modalShowHide () {
-    if ($winModal.hasClass("hide")) {
-        $winModal.removeClass("hide");
-    } else {
-        $winModal.addClass("hide");
-    }
-
+    $winModal.toggleClass("hide");
 }
 
 function updateModal (winningPlayer) {
@@ -160,10 +159,13 @@ function checkWin(playerPiece, positionY, positionX) {
 
             // Exits our win check if our current directional check produces a win that is determined by true
             if (thereIsAWin) {
-                return "YOUUUUU WIN";
+                currentPlayer ? playerWinCount.player2Wins++ : playerWinCount.player1Wins++;
+                updateStats(playerWinCount);
             }
         }
     }
+
+    togglePlayer();
 
     function countPiecesInCurrentDirection(playerPiece, currentVector, currentY, currentX, directionName) {
         let { y, x } = currentVector; // Determines the direction we're checking for our pieces
@@ -181,7 +183,7 @@ function checkWin(playerPiece, positionY, positionX) {
         }
 
         // Returns true to determine our win within the loop of our grouped directions
-        if (currentCount === 3) { // TODO change this to be dynamic with board size
+        if (currentCount === currentBoardSize) {
             console.log("we found a win in this direction", directionName);
             return true;
         }
