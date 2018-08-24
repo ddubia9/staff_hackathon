@@ -61,7 +61,6 @@ function applyEventHandlers(){
 }
 
 function createReferenceToDomElements(){
-    console.log("running reference")
     $gameBoard = $('#game-area');
     $winModal = $("#win-modal");
     $resetBttn = $('#reset-bttn')
@@ -73,7 +72,6 @@ function createReferenceToDomElements(){
 //function to build board, take this size of the board as a number
 function generateGameBoard(boardSize){
     clearBoard();
-    console.log('generating board')
     var boardSizeClasses = {
         3: 'three',
         4: 'four',
@@ -163,12 +161,10 @@ function checkWin(playerPiece, positionY, positionX) {
 
     // Grabs a set of directions to check for
     for (let directionGrouping of directions) {
-        console.log("Our groupings", directionGrouping);
         var currentCount = 1;
 
         // Grabs a specific direction for us to check for
         for (let vector in directionGrouping) {
-            console.log("Our currentVector", vector);
             let currentVector = directionGrouping[vector];
 
             thereIsAWin = countPiecesInCurrentDirection(playerPiece, currentVector, positionY, positionX, vector);
@@ -193,14 +189,12 @@ function checkWin(playerPiece, positionY, positionX) {
 
             // Collects a running total of our count of pieces in grouped direction
             if (boardArray[currentY][currentX] === playerPiece) {
-                console.log("Found a consecutive piece");
                 currentCount++;
             }
         }
 
         // Returns true to determine our win within the loop of our grouped directions
         if (currentCount === currentBoardSize) {
-            console.log("we found a win in this direction", directionName);
             return true;
         }
     }
