@@ -177,6 +177,7 @@ function checkWin(playerPiece, positionY, positionX) {
             if (thereIsAWin) {
                 currentPlayer ? playerWinCount.player2Wins++ : playerWinCount.player1Wins++;
                 updateStats(playerWinCount);
+                updateModal(currentPlayer);
                 return;
             }
         }
