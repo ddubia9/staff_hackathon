@@ -2,7 +2,8 @@ $('document').ready(initialize);
 
 var $gameBoard,
     $winModal,
-    $resetBttn;
+    $resetBttn,
+    $winModalWinner;
 
 var currentBoardSize = 3;
 var currentPlayer = 0;
@@ -58,6 +59,7 @@ function createReferenceToDomElements(){
     $gameBoard = $('#game-area');
     $winModal = $("#win-modal");
     $resetBttn = $('#reset-bttn')
+    $winModalWinner = $('#win-modal-winner');
 }
 
 //function to build board, take this size of the board as a number
@@ -128,6 +130,16 @@ function togglePlayer(){
 
 function modalShowHide () {
     $winModal.toggleClass("hide");
+}
+
+function updateModal (winningPlayer) {
+    var modalText = {
+        "undefined": 'Draw!',
+        0: 'Player 1 wins!',
+        1: 'Player 2 wins!'
+    }
+    $winModalWinner.text(modalText[winningPlayer]);
+    modalShowHide();
 }
 
 function checkWin(playerPiece, positionY, positionX) {
