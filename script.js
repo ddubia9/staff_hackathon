@@ -1,6 +1,7 @@
 $('document').ready(initialize);
 
 var $gameBoard;
+var boardArray;
 var currentBoardSize;
 var currentPlayer = 0;
 
@@ -29,6 +30,7 @@ function initialize(){
     console.log('running init')
     createReferenceToDomElements();
     generateGameBoard(5);
+    boardArray = generateBoardArray(5);
     $("#win-modal").addClass("hide");
     applyEventHandlers();
 }
@@ -85,6 +87,11 @@ function generateGameBoard(boardSize){
     return true;
 }
 
+function generateBoardArray(boardSize) {
+    currentBoardSize = boardSize;
+    return new Array(boardSize).fill(new Array(boardSize).fill(0));
+}
+
 function updateStats(){
 
 }
@@ -101,8 +108,11 @@ function clearBoard(){
     $gameBoard.empty();
 }
 
-function placePiece(){
+function placePiece(event){
+    let positionY = parseInt($(event.target).attr('row'));
+    let positionX = parseInt($(event.target).attr('column'));
 
+    checkWin(currentPlayer, positionY, positionX);
 }
 
 function reset(boardSize){
@@ -148,6 +158,8 @@ function checkWin(playerPiece, positionY, positionX) {
         }
     }
 
+    togglePlayer();
+
     function countPiecesInCurrentDirection(playerPiece, currentVector, currentY, currentX, directionName) {
         let { y, x } = currentVector; // Determines the direction we're checking for our pieces
 
@@ -164,7 +176,7 @@ function checkWin(playerPiece, positionY, positionX) {
         }
 
         // Returns true to determine our win within the loop of our grouped directions
-        if (currentCount === 3) { // TODO change this to be dynamic with board size
+        if (currentCount === currentBoardSize) {
             console.log("we found a win in this direction", directionName);
             return true;
         }
