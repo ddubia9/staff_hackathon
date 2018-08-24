@@ -58,6 +58,7 @@ function applyEventHandlers(){
     $resetBttn.on("click", ()=>{
         reset(currentBoardSize);
     })
+    $(".win-modal-button").on("click", modalShowHide);
 }
 
 function createReferenceToDomElements(){
