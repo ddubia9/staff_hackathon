@@ -133,6 +133,7 @@ function placePiece(event){
 }
 
 function reset(boardSize){
+    currentPlayer = 0;
     generateBoardArray(boardSize);
     generateGameBoard(boardSize);
 }
