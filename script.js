@@ -111,7 +111,7 @@ function generateBoardArray(boardSize) {
 
 function updateStats(obj){
     $p1WinCount.text(obj.player1Wins);
-    $p2WinCount.text(obj.player1Wins);
+    $p2WinCount.text(obj.player2Wins);
 }
 
 
