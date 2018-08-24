@@ -130,6 +130,18 @@ function modalShowHide () {
 
 }
 
+function updateModal (winningPlayer) {
+    if(winningPlayer === "undefined") {
+        $("#win-modal-winner").text("Draw!");
+
+    } else if (winningPlayer === 0) {
+        $("#win-modal-winner").text("Player 1 wins!");
+    } else {
+        $("#win-modal-winner").text("Player 2 wins!");
+    }
+    modalShowHide();
+}
+
 function checkWin(playerPiece, positionY, positionX) {
     let thereIsAWin = null;
 
