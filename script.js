@@ -2,6 +2,7 @@ $('document').ready(initialize);
 
 var $gameBoard,
     $winModal,
+    $resetBttn;
 
 var currentBoardSize;
 var currentPlayer = 0;
