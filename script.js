@@ -33,7 +33,6 @@ function initialize(){
     createReferenceToDomElements();
     generateGameBoard(5);
     applyEventHandlers();
-    $winModal.addClass("hide");
 }
 
 function applyEventHandlers(){
