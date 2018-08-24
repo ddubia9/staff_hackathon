@@ -103,6 +103,7 @@ function generateGameBoard(boardSize){
 
 function generateBoardArray(boardSize) {
     currentBoardSize = boardSize;
+    boardArray = [];
     for (var row = 0; row < boardSize; row++) {
         boardArray.push(new Array(boardSize).fill());
     }
@@ -134,7 +135,7 @@ function placePiece(event){
 
 function reset(boardSize){
     generateBoardArray(boardSize);
-    generateGameBoard(boardArray);
+    generateGameBoard(boardSize);
 }
 
 function togglePlayer(){
