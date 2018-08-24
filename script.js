@@ -35,7 +35,6 @@ function initialize(){
     boardArray = generateBoardArray(currentBoardSize);
     $("#win-modal").addClass("hide");
     applyEventHandlers();
-    $winModal.addClass("hide");
 }
 
 function applyEventHandlers(){
