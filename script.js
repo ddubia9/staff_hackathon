@@ -99,7 +99,10 @@ function generateGameBoard(boardSize){
 
 function generateBoardArray(boardSize) {
     currentBoardSize = boardSize;
-    return new Array(boardSize).fill(new Array(boardSize).fill(0));
+    for (var row = 0; row < boardSize; row++) {
+        boardArray.push(new Array(boardSize).fill());
+    }
+    return boardArray;
 }
 
 function updateStats(){
@@ -112,10 +115,16 @@ function clearBoard(){
 }
 
 function placePiece(event){
-    let positionY = parseInt($(event.target).attr('row'));
-    let positionX = parseInt($(event.target).attr('column'));
+    let currentPosition = $(event.target);
+    let positionY = parseInt(currentPosition.attr('row'));
+    let positionX = parseInt(currentPosition.attr('column'));
 
+    currentPlayer ? currentPosition.text("O") : currentPosition.text("X");
+    currentPosition.removeClass('clickable');
+
+    boardArray[positionY][positionX] = currentPlayer;
     checkWin(currentPlayer, positionY, positionX);
+    togglePlayer();
 }
 
 function reset(boardSize){
@@ -162,11 +171,10 @@ function checkWin(playerPiece, positionY, positionX) {
             if (thereIsAWin) {
                 currentPlayer ? playerWinCount.player2Wins++ : playerWinCount.player1Wins++;
                 updateStats(playerWinCount);
+                return;
             }
         }
     }
-
-    togglePlayer();
 
     function countPiecesInCurrentDirection(playerPiece, currentVector, currentY, currentX, directionName) {
         let { y, x } = currentVector; // Determines the direction we're checking for our pieces
